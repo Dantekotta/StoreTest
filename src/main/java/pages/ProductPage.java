@@ -19,14 +19,19 @@ public class ProductPage {
     }
 
     public void chooseQuantity(String quantity){
-//        WebElement quantityInput = driver.findElement(By.id("quantity_wanted"));
-//        quantityInput.click();
-//        quantityInput.sendKeys(Keys.chord((Keys.CONTROL + "a")));
-//        quantityInput.sendKeys(quantity);
         WebElement chooseAmount = driver.findElement(By.id("quantity_wanted"));
         chooseAmount.clear();
         chooseAmount.sendKeys(quantity);
+    }
 
+    public void checkDiscount(){
+        String discountAvailable;
+        boolean exist = driver.findElements(By.cssSelector(".discount.discount-percentage")).size() !=0;
+        if (exist == true) {
+            WebElement discount = driver.findElement(By.cssSelector(".discount.discount-percentage"));
+            discountAvailable = discount.getText();
+            System.out.println(discountAvailable);
+        }
     }
 
     public void addToCart(){

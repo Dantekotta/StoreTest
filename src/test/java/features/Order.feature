@@ -12,6 +12,8 @@ Feature: Order
     And User confirms shopping method
     And User choose option Pay by check and clicks on Order with obligation to pay
     Then Order is confirmed and Printscreen is taken
+    And Redirected to Order details page
+    And Order price should be the same as on Order Confirmation page, status is Awaiting
     And browser close
     Examples:
       | email                 | passwd      | size | quantity |

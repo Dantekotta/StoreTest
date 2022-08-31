@@ -60,7 +60,11 @@ public class FeatureSteps {
         AddressPage onAddressPage = new AddressPage(driver);
         Assert.isTrue(onAddressPage.checktest(alias, address, city, zip, country, phone), "Niepoprawne dane");
     }
-
+    @And("News address is deleted")
+    public void newsAddressIsDeleted() {
+        AddressPage onAddressPage = new AddressPage(driver);
+        Assert.isTrue(onAddressPage.deleteAddress(), "Adres nie został usunięty");
+    }
     @And("browser close")
     public void browserClose() {
         driver.quit();
@@ -82,6 +86,7 @@ public class FeatureSteps {
     @And("User choose {string} and {string}")
     public void userChooseAnd(String size, String quantity) {
         ProductPage onProductPage = new ProductPage(driver);
+        onProductPage.checkDiscount();
         onProductPage.chooseSize(size);
         onProductPage.chooseQuantity(quantity);
     }
@@ -124,6 +129,27 @@ public class FeatureSteps {
     public void orderIsConfirmedAndPrintscreenIsTaken() throws Exception {
         Screenshot takeScreenshot = new Screenshot(driver);
         takeScreenshot.takeSnapShot(driver);
+        OrderPage onOrderPage = new OrderPage(driver);
+        String costConfirmed = onOrderPage.cost();
+        OrderDetailsPage onOrderDetailPage = new OrderDetailsPage(driver);
+        OrderDetailsPage.setCost(costConfirmed);
+    }
 
+
+    @And("Redirected to Order details page")
+    public void redirectedToOrderDetailsPage() {
+        OrderPage onOrderPage = new OrderPage(driver);
+        onOrderPage.AccountPage();
+        AccountPage onAccountPage = new AccountPage(driver);
+        onAccountPage.getOrderHistory();
+        OrderHistoryPage onOrderHistoryPage = new OrderHistoryPage(driver);
+        onOrderHistoryPage.getDetails();
+    }
+
+    @And("Order price should be the same as on Order Confirmation page, status is Awaiting")
+    public void orderPriceShouldBeTheSameAsOnOrderConfirmationPageStatusIsAwaiting() {
+        OrderDetailsPage onOrderDetailsPage = new OrderDetailsPage(driver);
+        Assert.isTrue(onOrderDetailsPage.StatusAwaiting(), "Actual order status is not awaiting");
+        Assert.isTrue(onOrderDetailsPage.costComparison(), "Actual price is different from confirmation price");
     }
 }

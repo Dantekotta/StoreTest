@@ -21,4 +21,9 @@ public class AccountPage {
         clothes.click();
     }
 
+    public void getOrderHistory(){
+        WebElement orderHistoryButton = driver.findElement(By.id("history-link"));
+        orderHistoryButton.click();
+    }
+
 }

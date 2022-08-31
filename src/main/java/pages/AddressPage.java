@@ -44,4 +44,21 @@ public class AddressPage {
         }
         return test;
     }
+
+    public boolean deleteAddress(){
+        List<WebElement> deleteButtons = driver.findElements(By.xpath("//a[@data-link-action='delete-address']"));
+        WebElement lastDeleteButton = deleteButtons.get(deleteButtons.size()-1);
+        lastDeleteButton.click();
+
+        boolean checkDelete;
+        String successfullyDeleted = "Address successfully deleted!";
+        WebElement deleteConfirm = driver.findElement(By.cssSelector("[role=alert]"));
+        String displayDelete = deleteConfirm.getText();
+        if (Objects.equals(displayDelete, successfullyDeleted)){
+            checkDelete = true;
+        } else {
+            checkDelete = false;
+        }
+        return checkDelete;
+    }
 }

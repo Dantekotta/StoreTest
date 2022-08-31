@@ -38,4 +38,14 @@ public class OrderPage {
         orderButton.click();
     }
 
+    public String cost(){
+        WebElement costText = driver.findElement(By.cssSelector(".price"));
+        String cost = costText.getText();
+        return cost;
+    }
+    public void AccountPage(){
+        WebElement accountButton = driver.findElement(By.linkText("Baniel Banusz"));
+        accountButton.click();
+    }
+
 }
