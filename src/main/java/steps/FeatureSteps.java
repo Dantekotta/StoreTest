@@ -9,10 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.*;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-public class AddressSteps {
+public class FeatureSteps {
     private static WebDriver driver;
     @Given("User is on {string} site")
     public void userIsOnSite(String url) {
@@ -47,6 +46,7 @@ public class AddressSteps {
     public void userFillsTheFormWithAndConfirms(String alias, String address, String city, String zip, String country, String phone) {
         NewAddressPage onNewAddressPage = new NewAddressPage(driver);
         onNewAddressPage.newAddress(alias, address, city, zip, country, phone);
+
     }
 
     @Then("User should be redirected to address page")
